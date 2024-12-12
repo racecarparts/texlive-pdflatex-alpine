@@ -12,6 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          install: true
+          driver: docker-container
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -19,12 +25,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GCHR_TOKEN }}
 
-      - name: Build and push multi-platform Docker image
+      - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64 # Multi-platform build
           tags: |
             ghcr.io/${{ github.repository_owner }}/texlive-pdflatex-alpine:latest
             ghcr.io/${{ github.repository_owner }}/texlive-pdflatex-alpine:${{ github.sha }}
