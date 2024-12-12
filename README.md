@@ -13,5 +13,5 @@ I made this because this image is a slow build and I wanted to use it with other
 To pull and use the image:
 
 ```bash
-docker pull ghcr.io/<your-username>/texlive-pdflatex-alpine:latest
+docker pull ghcr.io/racecarparts/texlive-pdflatex-alpine:latest
 ```
